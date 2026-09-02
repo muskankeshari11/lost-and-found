@@ -11,6 +11,8 @@
     <title>Student Login | CampusFind</title>
 
     <link rel="stylesheet" href="newstyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabaseClient.js"></script>
 
 </head>
 
@@ -158,17 +160,22 @@
     </div>
 
 <script>
-document.getElementById("loginForm").addEventListener("submit", function(event)  {
+document.getElementById("loginForm").addEventListener("submit", async function(event)  {
     event.preventDefault();
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
-    if (email === "demo@campusfind.com" && password === "demo123") {
-        alert("Login Successful!");
-        window.location.href = "newindex.html";
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+    });
+
+    if (error) {
+        alert("Login Failed: " + error.message);
     } else {
-        alert("Wrong email or password");
+        alert("Login Successful!");
+        window.location.href = "index.html";
     }
 });
 </script>

@@ -7,6 +7,8 @@
     <title>CampusFind | AI Lost & Found</title>
 
     <link rel="stylesheet" href="newstyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabaseClient.js"></script>
 </head>
 <script src="newscript.js"></script>
 
@@ -349,70 +351,8 @@
         </div>
 
 
-        <div class="items-grid">
-
-            <div class="item-card">
-
-                <div class="item-image">🎧</div>
-
-                <div class="item-info">
-
-                    <span class="status found">
-                        FOUND
-                    </span>
-
-                    <h3>Wireless Headphones</h3>
-
-                    <p>📍 Computer Lab</p>
-
-                    <p>🕒 2 hours ago</p>
-
-                </div>
-
-            </div>
-
-
-            <div class="item-card">
-
-                <div class="item-image">💳</div>
-
-                <div class="item-info">
-
-                    <span class="status lost">
-                        LOST
-                    </span>
-
-                    <h3>Student ID Card</h3>
-
-                    <p>📍 Main Cafeteria</p>
-
-                    <p>🕒 Yesterday</p>
-
-                </div>
-
-            </div>
-
-
-            <div class="item-card">
-
-                <div class="item-image">⌚</div>
-
-                <div class="item-info">
-
-                    <span class="status found">
-                        FOUND
-                    </span>
-
-                    <h3>Black Smart Watch</h3>
-
-                    <p>📍 Sports Complex</p>
-
-                    <p>🕒 Yesterday</p>
-
-                </div>
-
-            </div>
-
+        <div class="items-grid" id="itemsGrid">
+            <p>Loading items...</p>
         </div>
 
     </section>

@@ -8,6 +8,8 @@
     <title>Create Account | CampusFind</title>
 
     <link rel="stylesheet" href="newstyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabaseClient.js"></script>
 </head>
 
 <body class="login-page">
@@ -178,16 +180,32 @@
 
         document
             .getElementById("signupForm")
-            .addEventListener("submit", function(event) {
+            .addEventListener("submit", async function(event) {
 
                 event.preventDefault();
 
-                alert(
-                    "🎉 Account Created!\n\n" +
-                    "Welcome to CampusFind!"
-                );
+                const name = document.getElementById("studentName").value.trim();
+                const email = document.getElementById("signupEmail").value.trim();
+                const studentId = document.getElementById("studentId").value.trim();
+                const password = document.getElementById("signupPassword").value;
 
-                window.location.href = "login.html";
+                const { data, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            full_name: name,
+                            student_id: studentId
+                        }
+                    }
+                });
+
+                if (error) {
+                    alert("Signup Failed: " + error.message);
+                } else {
+                    alert("🎉 Account Created!\n\nWelcome to CampusFind!");
+                    window.location.href = "login.html";
+                }
 
             });
 
