@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Login | CampusFind</title>
+
+    <link rel="stylesheet" href="newstyle.css">
+
+</head>
+
+
+<body class="login-page">
+
+    <div class="login-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="login-info">
+
+            <div class="login-logo">
+                🔎 CampusFind
+            </div>
+
+            <div class="login-message">
+
+                <span>YOUR CAMPUS. YOUR COMMUNITY.</span>
+
+                <h1>
+                    Welcome back.
+                    <br>
+                    Let's find what's lost.
+                </h1>
+
+                <p>
+                    Sign in to report lost items, discover
+                    found belongings and receive potential
+                    AI matches.
+                </p>
+
+            </div>
+
+            <div class="login-tip">
+                🛡️ Your campus account keeps the community safer.
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="login-form-container">
+
+            <div class="login-form">
+
+                <div class="mobile-logo">
+                    🔎 CampusFind
+                </div>
+
+                <span class="form-label">
+                    STUDENT PORTAL
+                </span>
+
+                <h2>Sign in to your account</h2>
+
+                <p class="form-subtitle">
+                    Use your college email to continue.
+                </p>
+
+
+                <form id="loginForm">
+
+                    <!-- EMAIL -->
+
+                    <label for="email">
+                        College Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="you@college.edu"
+                        required
+                    >
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="password-heading">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <a href="#">
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+
+                    <!-- REMEMBER -->
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        <span>Keep me signed in</span>
+
+                    </label>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-submit"
+                    >
+                        Sign In →
+                    </button>
+
+                </form>
+
+
+                <!-- SIGN UP -->
+
+                <div class="signup">
+
+                    <span>
+                        New to CampusFind?
+                    </span>
+
+                    <a href="signup.html">
+    Create an account
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(event)  {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (email === "demo@campusfind.com" && password === "demo123") {
+        alert("Login Successful!");
+        window.location.href = "newindex.html";
+    } else {
+        alert("Wrong email or password");
+    }
+});
+</script>
+</body>
+
+</html>

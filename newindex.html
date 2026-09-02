@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind | AI Lost & Found</title>
+
+    <link rel="stylesheet" href="newstyle.css">
+</head>
+<script src="newscript.js"></script>
+
+    <!-- REPORT ITEM SECTION -->
+
+<section class="report-section" id="report">
+
+    <div class="report-box">
+
+        <div class="report-title">
+            <span>REPORT AN ITEM</span>
+
+            <h2>Tell us what you lost</h2>
+
+            <p>
+                Add a few details about your item.
+                We'll help you find a possible match.
+            </p>
+        </div>
+
+
+        <form id="lostItemForm">
+
+            <label>Item Name</label>
+
+            <input
+                type="text"
+                id="itemName"
+                placeholder="Example: Black Backpack"
+                required
+            >
+
+
+            <label>Category</label>
+
+            <select id="category" required>
+
+                <option value="">Select category</option>
+
+                <option>Bag</option>
+                <option>Electronics</option>
+                <option>Student ID</option>
+                <option>Books</option>
+                <option>Clothing</option>
+                <option>Accessories</option>
+                <option>Other</option>
+
+            </select>
+
+
+            <label>Color</label>
+
+            <input
+                type="text"
+                id="color"
+                placeholder="Example: Black"
+            >
+
+
+            <label>Where did you lose it?</label>
+
+            <input
+                type="text"
+                id="location"
+                placeholder="Example: Central Library"
+            >
+
+
+            <label>Describe your item</label>
+
+            <textarea
+                id="description"
+                placeholder="Mention brand, stickers, marks, keychains etc."
+                rows="5"
+            ></textarea>
+
+
+            <label>Upload a photo</label>
+
+            <input
+                type="file"
+                id="itemImage"
+                accept="image/*"
+            >
+
+
+            <button type="submit" class="primary-btn">
+                🤖 Find Potential Matches
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+</section>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <span>🔎</span> CampusFind
+        </div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#browse">Browse Items</a>
+            <a href="#how">How It Works</a>
+            <a href="#about">About</a>
+        </div>
+
+        <button class="login-btn" onclick="window.location.href='login.html'">
+    Student Login
+</button>
+    </nav>
+
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="ai-badge">
+                ✨ AI-Powered Campus Recovery
+            </div>
+
+            <h1>
+                Lost something?<br>
+                <span>Let's find it.</span>
+            </h1>
+
+            <p>
+                CampusFind connects lost and found items across your
+                college using AI-powered matching.
+            </p>
+
+            <div class="hero-buttons">
+<button class="primary-btn" onclick="window.location.href='report.html'">
+    Report an Item →
+</button>
+
+<button class="secondary-btn" onclick="window.location.href='report.html'">
+    Browse Found Items →
+</button>
+            </div>
+
+            <div class="trust-text">
+                🛡️ Built for your campus community
+            </div>
+
+        </div>
+
+
+        <!-- AI MATCH CARD -->
+
+        <div class="match-card">
+
+            <div class="card-header">
+                <div>
+                    <small>AI MATCH FOUND</small>
+                    <h3>Possible Match</h3>
+                </div>
+
+                <div class="match-score">
+                    94%
+                </div>
+            </div>
+
+
+            <div class="item-comparison">
+
+                <div class="item-box">
+                    <div class="item-icon">🎒</div>
+                    <strong>Lost Report</strong>
+                    <p>Black Backpack</p>
+                    <small>Library • Aug 28</small>
+                </div>
+
+                <div class="match-arrow">
+                    ↔
+                </div>
+
+                <div class="item-box">
+                    <div class="item-icon">🎒</div>
+                    <strong>Found Report</strong>
+                    <p>Black Backpack</p>
+                    <small>Library • Aug 28</small>
+                </div>
+
+            </div>
+
+
+            <div class="match-reasons">
+
+                <h4>Why AI thinks they match</h4>
+
+                <div class="reason">
+                    <span>✓</span> Same item category
+                </div>
+
+                <div class="reason">
+                    <span>✓</span> Similar color & appearance
+                </div>
+
+                <div class="reason">
+                    <span>✓</span> Location is nearby
+                </div>
+
+                <div class="reason">
+                    <span>✓</span> Matching date
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+
+    <section class="stats">
+
+        <div class="stat">
+            <h2>1,248+</h2>
+            <p>Items Reported</p>
+        </div>
+
+        <div class="stat">
+            <h2>846</h2>
+            <p>Items Recovered</p>
+        </div>
+
+        <div class="stat">
+            <h2>92%</h2>
+            <p>Successful Matches</p>
+        </div>
+
+        <div class="stat">
+            <h2>24/7</h2>
+            <p>Campus Access</p>
+        </div>
+
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+
+    <section class="how-section" id="how">
+
+        <div class="section-title">
+
+            <span>HOW IT WORKS</span>
+
+            <h2>
+                Finding your belongings,
+                <br>
+                made easier.
+            </h2>
+
+            <p>
+                Three simple steps connect your lost item with someone
+                who may have found it.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step-card">
+
+                <div class="step-number">01</div>
+
+                <div class="step-icon">📸</div>
+
+                <h3>Report Your Item</h3>
+
+                <p>
+                    Upload a photo and tell us where and when
+                    you lost your item.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-number">02</div>
+
+                <div class="step-icon">🤖</div>
+
+                <h3>AI Understands</h3>
+
+                <p>
+                    AI analyzes the item's appearance, category,
+                    location and other details.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-number">03</div>
+
+                <div class="step-icon">🎯</div>
+
+                <h3>Get a Match</h3>
+
+                <p>
+                    When a similar found item appears, you receive
+                    a potential match with a confidence score.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BROWSE SECTION -->
+
+    <section class="browse-section" id="browse">
+
+        <div class="browse-header">
+
+            <div>
+                <span>RECENT REPORTS</span>
+
+                <h2>Items looking for their owners</h2>
+            </div>
+
+            <button class="view-btn">
+                View all →
+            </button>
+
+        </div>
+
+
+        <div class="items-grid">
+
+            <div class="item-card">
+
+                <div class="item-image">🎧</div>
+
+                <div class="item-info">
+
+                    <span class="status found">
+                        FOUND
+                    </span>
+
+                    <h3>Wireless Headphones</h3>
+
+                    <p>📍 Computer Lab</p>
+
+                    <p>🕒 2 hours ago</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="item-card">
+
+                <div class="item-image">💳</div>
+
+                <div class="item-info">
+
+                    <span class="status lost">
+                        LOST
+                    </span>
+
+                    <h3>Student ID Card</h3>
+
+                    <p>📍 Main Cafeteria</p>
+
+                    <p>🕒 Yesterday</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="item-card">
+
+                <div class="item-image">⌚</div>
+
+                <div class="item-info">
+
+                    <span class="status found">
+                        FOUND
+                    </span>
+
+                    <h3>Black Smart Watch</h3>
+
+                    <p>📍 Sports Complex</p>
+
+                    <p>🕒 Yesterday</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta" id="about">
+
+        <div>
+
+            <h2>
+                One campus.
+                <br>
+                One community.
+                <br>
+                Fewer lost items.
+            </h2>
+
+            <p>
+                Help someone get their belongings back.
+            </p>
+
+        </div>
+
+        <button class="primary-btn" onclick="reportLost()">
+            Report an Item →
+        </button>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-logo">
+            🔎 CampusFind
+        </div>
+
+        <p>
+            AI-powered lost & found for your campus.
+        </p>
+
+        <p class="copyright">
+            © 2026 CampusFind • Built for students
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function reportLost() {
+            alert("Lost Item Report feature coming next! 🚀");
+        }
+
+        function browseItems() {
+            document.getElementById("browse").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+    </script>
+
+</body>
+</html>

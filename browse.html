@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Browse Found Items | CampusFind</title>
+
+    <link rel="stylesheet" href="newstyle.css">
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const SUPABASE_URL = "https://qsrnzplxigfoirstloha.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_GOW9qfeqsxFvJ1RRCz5t6g_8PFyTIKY";
+        
+
+        const supabaseClient = supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+    </script>
+
+</head>
+
+<body class="browse-page">
+
+    <!-- NAVBAR -->
+    <nav class="report-nav">
+
+        <div class="report-logo">
+            🔎 CampusFind
+        </div>
+
+        <a href="newindex.html">
+            ← Home
+        </a>
+
+    </nav>
+
+
+    <!-- HEADER -->
+    <main class="browse-wrapper">
+
+        <div class="browse-header">
+
+            <span>FOUND ITEMS</span>
+
+            <h1>Maybe someone found it.</h1>
+
+            <p>
+                Browse recently reported items from your campus community.
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH -->
+        <div class="search-box">
+
+            🔍
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search for an item..."
+                onkeyup="searchItems()"
+            >
+
+        </div>
+
+
+        <!-- FILTERS -->
+        <div class="filters">
+
+            <button onclick="filterItems('all')">
+                All Items
+            </button>
+
+            <button onclick="filterItems('bag')">
+                🎒 Bags
+            </button>
+
+            <button onclick="filterItems('electronics')">
+                📱 Electronics
+            </button>
+
+            <button onclick="filterItems('books')">
+                📚 Books
+            </button>
+
+            <button onclick="filterItems('keys')">
+                🔑 Keys
+            </button>
+
+        </div>
+
+
+        <!-- ITEMS FROM SUPABASE -->
+        <div class="items-grid" id="itemsGrid">
+        </div>
+
+    </main>
+
+
+    <script>
+
+        async function loadFoundItems() {
+            
+            console.log("SUPABASE TEST STARTED");
+
+            const { data, error } = await supabaseClient
+                .from("items")
+                .select("*")
+                .eq("status", "found")
+                .order("id", { ascending: false });
+
+
+            if (error) {
+
+                console.error("SUPABASE ERROR:", error);
+
+                document.getElementById("itemsGrid").innerHTML = `
+                    <p>❌ Unable to load found items.</p>
+                `;
+
+                return;
+            }
+
+
+            const itemsGrid = document.getElementById("itemsGrid");
+
+
+            if (!data || data.length === 0) {
+
+                itemsGrid.innerHTML = `
+                    <div style="text-align:center; width:100%; padding:40px;">
+
+                        <h3>🔍 No found items yet</h3>
+
+                        <p>
+                            Be the first person to report a found item!
+                        </p>
+
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            itemsGrid.innerHTML = data.map(item => `
+
+                <div class="found-card" data-category="${item.category}">
+
+                    <div class="found-image">
+                        📦
+                    </div>
+
+
+                    <div class="found-content">
+
+                        <span class="item-category">
+                            ${item.category.toUpperCase()}
+                        </span>
+
+
+                        <h3>
+                            ${item.item_name}
+                        </h3>
+
+
+                        <p>
+                            ${item.description}
+                        </p>
+
+
+                        <div class="item-location">
+                            📍 ${item.location}
+                        </div>
+
+
+                        <button onclick="viewItem('${item.item_name}')">
+                            View Details →
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `).join("");
+
+        }
+
+
+        function viewItem(item) {
+
+            alert(
+                "🔎 " + item +
+                "\n\n" +
+                "This item was reported by a campus member.\n\n" +
+                "If you think this is yours, you can send a request to the finder."
+            );
+
+        }
+
+
+        function filterItems(category) {
+
+            const cards =
+                document.querySelectorAll(".found-card");
+
+
+            cards.forEach(card => {
+
+                if (
+                    category === "all" ||
+                    card.dataset.category === category
+                ) {
+
+                    card.style.display = "block";
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+
+        function searchItems() {
+
+            const search =
+                document
+                    .getElementById("searchInput")
+                    .value
+                    .toLowerCase();
+
+
+            const cards =
+                document.querySelectorAll(".found-card");
+
+
+            cards.forEach(card => {
+
+                const text =
+                    card.innerText.toLowerCase();
+
+
+                if (text.includes(search)) {
+
+                    card.style.display = "block";
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+
+        // LOAD FOUND ITEMS
+        loadFoundItems();
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Report Lost Item | CampusFind</title>
+
+    <link rel="stylesheet" href="newstyle.css">
+</head>
+
+<body class="report-page">
+
+    <!-- NAVBAR -->
+
+    <nav class="report-nav">
+
+        <div class="report-logo">
+            🔎 CampusFind
+        </div>
+
+        <a href="newindex.html">
+            ← Back to Home
+        </a>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="report-wrapper">
+
+        <div class="report-header">
+
+            <span>LOST ITEM REPORT</span>
+
+            <h1>Tell us what you lost.</h1>
+
+            <p>
+                Add a few details about your item.
+                We'll use them to find possible matches.
+            </p>
+
+        </div>
+
+
+        <!-- FORM CARD -->
+
+        <div class="report-card">
+
+            <form id="lostItemForm">
+
+                <!-- ITEM NAME -->
+
+                <div class="form-group">
+
+                    <label for="itemName">
+                        What did you lose?
+                    </label>
+
+                    <input
+                        type="text"
+                        id="itemName"
+                        placeholder="Example: Black Backpack"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CATEGORY + COLOR -->
+
+                <div class="two-column">
+
+                    <div class="form-group">
+
+                        <label for="category">
+                            Category
+                        </label>
+
+                        <select id="category" required>
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option>Bag</option>
+                            <option>Electronics</option>
+                            <option>Books</option>
+                            <option>Clothing</option>
+                            <option>Keys</option>
+                            <option>Wallet</option>
+                            <option>Accessories</option>
+                            <option>Other</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="itemColor">
+                            Color
+                        </label>
+
+                        <input
+                            type="text"
+                            id="itemColor"
+                            placeholder="Example: Black"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="form-group">
+
+                    <label for="location">
+                        Where did you lose it?
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="Example: Central Library"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Describe your item
+                    </label>
+
+                    <textarea
+                        id="description"
+                        placeholder="Mention brand, stickers, marks, keychains, scratches etc."
+                        required
+                    ></textarea>
+
+                    <small>
+                        💡 More details help us find better matches.
+                    </small>
+
+                </div>
+
+
+                <!-- PHOTO -->
+
+                <div class="form-group">
+
+                    <label>
+                        Upload a photo
+                    </label>
+
+                    <div class="upload-box">
+
+                        <div class="upload-icon">
+                            📷
+                        </div>
+
+                        <p>
+                            Upload a photo of your lost item
+                        </p>
+
+                        <span>
+                            JPG, PNG up to 5MB
+                        </span>
+
+                        <input
+                            type="file"
+                            id="itemPhoto"
+                            accept="image/*"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+                    <label for="lostDate">
+                        When did you lose it?
+                    </label>
+
+                    <input
+                        type="date"
+                        id="lostDate"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="match-button"
+                >
+                    🤖 Find Potential Matches
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- AI INFO -->
+
+        <div class="ai-info">
+
+            <div class="ai-icon">
+                ✨
+            </div>
+
+            <div>
+
+                <strong>
+                    How AI matching works
+                </strong>
+
+                <p>
+                    CampusFind compares your item's
+                    category, color, description, location
+                    and other details with found-item reports
+                    to identify potential matches.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://qsrnzplxigfoirstloha.supabase.co";
+const SUPABASE_KEY = "sb_publishable_GOW9qfeqsxFvJ1RRCz5t6g_8PFyTIKY";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+</script>
+   
+<script>
+
+document.getElementById("lostItemForm").addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    // Get item details
+    const itemName = document.getElementById("itemName").value;
+    const category = document.getElementById("category").value;
+    const color = document.getElementById("itemColor").value;
+    const location = document.getElementById("location").value;
+    const description = document.getElementById("description").value;
+    const lostDate = document.getElementById("lostDate").value;
+
+    // Save item to Supabase
+    const { error } = await supabaseClient
+        .from("items")
+        .insert([
+            {
+                item_name: itemName,
+                category: category,
+                color: color,
+                location: location,
+                description: description,
+                status: "lost",
+                lost_date: lostDate
+            }
+        ]);
+
+    // Check if saving failed
+    if (error) {
+        console.error("SUPABASE ERROR:", error.message, error.details, error.hint);
+        alert("❌ Item save nahi hua. Please try again.");
+        return;
+    }
+
+    // Show success message
+    alert("✅ Your lost item has been reported!");
+
+    // Show AI matching result
+    document.querySelector(".report-card").innerHTML = `
+
+        <div class="match-result">
+
+            <div class="ai-found">
+                ✨ AI MATCH FOUND
+            </div>
+
+            <div class="match-top">
+
+                <div>
+                    <p class="small-title">POSSIBLE MATCH</p>
+                    <h2>${itemName}</h2>
+                </div>
+
+                <div class="match-percent">
+                    94%
+                    <span>Match</span>
+                </div>
+
+            </div>
+
+            <div class="match-items">
+
+                <div class="match-item">
+
+                    <div class="item-image">🎒</div>
+
+                    <div>
+                        <strong>Your Lost Report</strong>
+                        <p>${itemName}</p>
+                        <span>${category} • ${color}</span>
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    ↔
+                </div>
+
+                <div class="match-item">
+
+                    <div class="item-image">🎒</div>
+
+                    <div>
+                        <strong>Found Report</strong>
+                        <p>${color} ${category}</p>
+                        <span>Reported near ${location}</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="why-match">
+
+                <h3>🤖 Why AI thinks they match</h3>
+
+                <p>✓ Same item category</p>
+                <p>✓ Similar color and appearance</p>
+                <p>✓ Location is nearby</p>
+                <p>✓ Matching report details</p>
+
+            </div>
+
+            <button class="contact-button" onclick="sendRequest()">
+                Contact Finder →
+            </button>
+
+            <button class="back-button" onclick="location.reload()">
+                ← Search Again
+            </button>
+
+        </div>
+
+    `;
+
+});
+
+
+function sendRequest() {
+
+    alert(
+        "📩 Match Request Sent!\n\n" +
+        "The finder has been notified about your request.\n\n" +
+        "CampusFind will keep you updated."
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>
